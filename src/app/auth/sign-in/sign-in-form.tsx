@@ -24,6 +24,8 @@ import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
 import { PasswordInput } from "@/components/password-input"
 
+import { SocialSection } from "@/app/auth/sign-in/social-section"
+
 export default function SignInForm() {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get("callbackUrl")
@@ -115,6 +117,7 @@ export default function SignInForm() {
         >
           Sign in
         </Button>
+        <SocialSection />
       </form>
     </Form>
   )
