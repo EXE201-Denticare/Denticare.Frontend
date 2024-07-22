@@ -3,15 +3,16 @@ import { SignInSchema } from "@/schemas/auth.schema"
 import type { NextAuthConfig } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import Github from "next-auth/providers/github"
+import Google from "next-auth/providers/google"
 
 import { db } from "@/lib/db"
 
 export default {
   providers: [
-    // Google({
-    //   clientId: process.env.GOOGLE_CLIENT_ID,
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    // }),
+    Google({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
     Github({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,

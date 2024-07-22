@@ -6,7 +6,6 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/configs/routes"
 import { signIn } from "next-auth/react"
 import { FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
-import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 
@@ -27,7 +26,7 @@ export const SocialSection = () => {
         size="lg"
         className="w-full"
         variant="outline"
-        onClick={() => toast.error("Not supported yet")}
+        onClick={() => socialSignIn("google")}
       >
         <FcGoogle className="h-5 w-5" />
       </Button>
