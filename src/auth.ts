@@ -13,17 +13,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token }) {
       if (!token.sub) return token
+      console.log("token", token)
 
-      const existingUser = await db.user.findUnique({
-        where: {
-          user_id: token.sub,
-        },
-      })
+      // const existingUser = await db.user.findUnique({
+      //   where: {
+      //     user_id: token.sub,
+      //   },
+      // })
 
-      console.log("existingUser", existingUser)
-      if (!existingUser) return token
+      // console.log("existingUser", existingUser)
+      // if (!existingUser) return token
 
-      token.role = existingUser.role as Role
+      // token.role = existingUser.role as Role
       return token
     },
     async session({ token, session }) {

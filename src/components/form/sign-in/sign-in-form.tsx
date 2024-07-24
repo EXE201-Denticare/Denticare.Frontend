@@ -1,7 +1,8 @@
 "use client"
 
-import React, { useState, useTransition } from "react"
+import { useState, useTransition } from "react"
 
+import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 
 import { signIn } from "@/actions/sign-in"
@@ -20,15 +21,18 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-import { FormError } from "@/components/form-error"
-import { FormSuccess } from "@/components/form-success"
-import { PasswordInput } from "@/components/password-input"
-
-import { SocialSection } from "@/app/auth/sign-in/social-section"
+import { FormError } from "@/components/form/form-error"
+import { FormSuccess } from "@/components/form/form-success"
+import { PasswordInput } from "@/components/input/password-input"
+import { SocialSection } from "@/components/social-section"
 
 export default function SignInForm() {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get("callbackUrl")
+  const urlError =
+    searchParams.get("error") === "OAuthAccountNotLinked"
+      ? "Email already in use with different provider!"
+      : ""
 
   const [error, setError] = useState<string | undefined>("")
   const [success, setSuccess] = useState<string | undefined>("")
@@ -59,15 +63,17 @@ export default function SignInForm() {
           setError("An unexpected error occurred while signing in.")
         })
     })
-    console.log(values)
   }
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        // TODO: FIX Style
-        className="w-[400px] space-y-6"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
+        <section className="mb-12 space-y-4">
+          <h1 className="header">Welcome Back!</h1>
+          <p className="text-iridium md:text-sm">
+            Ready to brighten your smile? Sign in and join the Denticare family!
+          </p>
+        </section>
+
         <FormField
           control={form.control}
           name="email"
@@ -77,7 +83,7 @@ export default function SignInForm() {
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Email Address
+                Email
               </Label>
               <FormControl>
                 <Input type="text" placeholder="abc@example.com" {...field} />
@@ -105,7 +111,7 @@ export default function SignInForm() {
           )}
         />
 
-        <FormError message={error} />
+        <FormError message={error || urlError} />
         <FormSuccess message={success} />
 
         <Button
@@ -117,7 +123,18 @@ export default function SignInForm() {
         >
           Sign in
         </Button>
+
         <SocialSection />
+
+        <div className="flex items-center justify-center text-sm">
+          <span className="text-dark-600">New to Denticare?</span>
+          <Link
+            href="/auth/sign-up"
+            className="ml-2 text-primary hover:underline"
+          >
+            Create account
+          </Link>
+        </div>
       </form>
     </Form>
   )

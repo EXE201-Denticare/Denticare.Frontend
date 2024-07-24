@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google"
+import { Plus_Jakarta_Sans as FontSans } from "next/font/google"
 
 import { auth } from "@/auth"
 import { constructMetadata } from "@/configs/site"
@@ -7,11 +8,17 @@ import { ThemeProvider } from "@/providers/theme-provider"
 import TailwindIndicator from "@/tools/tailwind-indicator"
 import { SessionProvider } from "next-auth/react"
 
+import { cn } from "@/lib/utils"
+
 import { Toaster } from "@/components/ui/sonner"
 
 import "@/styles/globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const fontSans = FontSans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-sans",
+})
 
 export const metadata = constructMetadata()
 
@@ -22,9 +29,14 @@ export default async function RootLayout({
 }>) {
   const session = await auth()
   return (
-    <SessionProvider session={session}>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body
+        className={cn(
+          "min-h-screen bg-white font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        <SessionProvider session={session}>
           <ReactQueryClientProvider>
             <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
               <Toaster position="top-right" />
@@ -34,8 +46,8 @@ export default async function RootLayout({
               <TailwindIndicator />
             </ThemeProvider>
           </ReactQueryClientProvider>
-        </body>
-      </html>
-    </SessionProvider>
+        </SessionProvider>
+      </body>
+    </html>
   )
 }
