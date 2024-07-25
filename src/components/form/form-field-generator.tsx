@@ -91,7 +91,6 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
       return (
         <FormControl>
           <PhoneInput
-            maxLength={15}
             defaultCountry="VN"
             placeholder={props.placeholder}
             value={field.value as E164Number}
@@ -118,7 +117,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
     case FormFieldType.DATE_PICKER:
       return (
         <FormControl>
-          <DatePicker initialDate={field.value} onChange={field.onChange} />
+          <DatePicker value={field.value} onChange={field.onChange} />
         </FormControl>
       )
     case FormFieldType.SELECT:

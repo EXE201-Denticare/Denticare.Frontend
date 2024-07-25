@@ -16,12 +16,18 @@ import {
 interface DatePickerProps {
   value: Date
   onChange?: (date: Date) => void
+  dateFormat?: string
 }
 
-export function DatePicker({ value, onChange }: DatePickerProps) {
-  const [date, setDate] = useState<Date>(value || new Date())
+export function DatePicker({
+  value,
+  onChange,
+  dateFormat = "MMMM do, yyyy",
+}: DatePickerProps) {
+  const [date, setDate] = useState<Date>(value)
 
   const handleDateChange = (selectedDate: Date) => {
+    if (!selectedDate) return
     setDate(selectedDate)
     if (onChange) {
       onChange(selectedDate)
@@ -40,15 +46,24 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {date ? (
-            <span>{format(date, "EEE, MMM d, yyyy")}</span>
+            <span>{format(date, dateFormat)}</span>
           ) : (
             <span>Pick a date</span>
           )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        {/* @ts-ignore */}
-        <Calendar mode="single" selected={date} onSelect={handleDateChange} />
+        <Calendar
+          mode="single"
+          selected={date}
+          // @ts-ignore
+          onSelect={handleDateChange}
+          classNames={{ caption_label: "hidden" }}
+          captionLayout="dropdown-buttons"
+          defaultMonth={date}
+          fromYear={1960}
+          toYear={new Date().getFullYear() + 1}
+        />
       </PopoverContent>
     </Popover>
   )

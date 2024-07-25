@@ -27,7 +27,7 @@ export default function Page() {
           <FormProvider>
             <div className="flex flex-col gap-3 py-4">
               <SignUpFormStep />
-              <StepButton />
+              <StepButton className="mt-4" />
             </div>
           </FormProvider>
         </div>

@@ -4,13 +4,15 @@ import Link from "next/link"
 
 import useSignUpStepStore from "@/stores/use-sign-up-store"
 
+import { cn } from "@/lib/utils"
+
 import { Button } from "@/components/ui/button"
 
-export default function StepButton() {
+export default function StepButton({ className }: { className?: string }) {
   const { currentStep, setCurrentStep } = useSignUpStepStore()
 
   return (
-    <div className="flex w-full flex-col items-center gap-3">
+    <div className={cn("flex w-full flex-col items-center gap-3", className)}>
       {currentStep === 2 ? (
         <div className="flex w-full items-center gap-x-2">
           <Button

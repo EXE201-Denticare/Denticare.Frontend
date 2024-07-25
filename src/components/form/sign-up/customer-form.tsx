@@ -99,7 +99,7 @@ export default function CustomerForm() {
             fieldType={FormFieldType.INPUT_PASSWORD}
             control={form.control}
             name="password"
-            placeholder=""
+            placeholder="ex: Password@123"
             label="Password"
             inputType="password"
           />
@@ -107,7 +107,7 @@ export default function CustomerForm() {
             fieldType={FormFieldType.INPUT_PASSWORD}
             control={form.control}
             name="confirmPassword"
-            placeholder=""
+            placeholder="ex: Password@123"
             inputType="password"
             label="Confirm Password"
           />
