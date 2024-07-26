@@ -28,7 +28,7 @@ export const SocialSection = () => {
         variant="outline"
         onClick={() => socialSignIn("google")}
       >
-        <FcGoogle className="h-5 w-5" />
+        <FcGoogle className="size-5" />
       </Button>
       <Button
         type="button"
@@ -37,7 +37,7 @@ export const SocialSection = () => {
         variant="outline"
         onClick={() => socialSignIn("github")}
       >
-        <FaGithub className="h-5 w-5" />
+        <FaGithub className="size-5" />
       </Button>
     </div>
   )

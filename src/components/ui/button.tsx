@@ -25,7 +25,7 @@ const buttonVariants = cva(
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        icon: "size-9",
       },
     },
     defaultVariants: {
@@ -67,9 +67,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading && loadingText ? loadingText : children}
         {isLoading ? (
           <span className="ml-1.5 flex items-center gap-1">
-            <span className="inline-block h-1 w-1 animate-flashing rounded-full bg-white" />
-            <span className="inline-block h-1 w-1 animate-flashing rounded-full bg-white delay-100" />
-            <span className="inline-block h-1 w-1 animate-flashing rounded-full bg-white delay-200" />
+            <span className="inline-block size-1 animate-flashing rounded-full bg-white" />
+            <span className="inline-block size-1 animate-flashing rounded-full bg-white delay-100" />
+            <span className="inline-block size-1 animate-flashing rounded-full bg-white delay-200" />
           </span>
         ) : null}
       </Comp>

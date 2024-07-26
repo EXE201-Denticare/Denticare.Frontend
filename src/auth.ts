@@ -1,7 +1,7 @@
 import authConfig from "@/configs/auth.config"
 import { Role } from "@/schemas/user.schema"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import NextAuth, { DefaultSession } from "next-auth"
+import NextAuth from "next-auth"
 
 import { db } from "@/lib/db"
 

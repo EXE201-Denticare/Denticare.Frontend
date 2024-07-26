@@ -104,7 +104,7 @@ const CountrySelect = ({
           <FlagComponent country={value} countryName={value} />
           <ChevronsUpDown
             className={cn(
-              "-mr-2 h-4 w-4 opacity-50",
+              "-mr-2 size-4 opacity-50",
               disabled ? "hidden" : "opacity-100"
             )}
           />
@@ -137,7 +137,7 @@ const CountrySelect = ({
                       )}
                       <CheckIcon
                         className={cn(
-                          "ml-auto h-4 w-4",
+                          "ml-auto size-4",
                           option.value === value ? "opacity-100" : "opacity-0"
                         )}
                       />

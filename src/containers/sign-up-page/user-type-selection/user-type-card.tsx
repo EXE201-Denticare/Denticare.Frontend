@@ -62,7 +62,7 @@ function UserTypeCard({ setUserType, text, title, userType, value }: Props) {
           <div>
             <div
               className={cn(
-                "h-4 w-4 rounded-full",
+                "size-4 rounded-full",
                 userType === value ? "bg-primary" : "bg-transparent"
               )}
             >

@@ -44,7 +44,7 @@ export function DatePicker({
             !date && "text-muted-foreground"
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4" />
+          <CalendarIcon className="mr-2 size-4" />
           {date ? (
             <span>{format(date, dateFormat)}</span>
           ) : (

@@ -1,4 +1,3 @@
-import { Inter } from "next/font/google"
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google"
 
 import { auth } from "@/auth"

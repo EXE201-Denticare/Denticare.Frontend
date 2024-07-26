@@ -1,16 +1,12 @@
-import React from "react"
-
-import Link from "next/link"
-
 import { auth, signOut } from "@/auth"
 
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 
 export default async function Page() {
   const session = await auth()
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className="h-[200vh]">
+      <h1>Xin chào 123 , đây là denticare </h1>
       <p>{JSON.stringify(session)}</p>
       <p>Role: {session?.user?.role}</p>
       <form
@@ -22,9 +18,6 @@ export default async function Page() {
           })
         }}
       >
-        <Link href="/auth/sign-in" className={buttonVariants({})}>
-          Sign in
-        </Link>
         <Button type="submit">Sign Out</Button>
       </form>
     </div>
