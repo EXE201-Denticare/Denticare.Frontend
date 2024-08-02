@@ -8,7 +8,7 @@ import MaxWidthWrapper from "@/components/layouts/max-width-wrapper"
 
 function SiteHeader() {
   return (
-    <header className="sticky inset-x-0 top-0 z-[100] h-14 w-full shadow-sm">
+    <header className="sticky inset-x-0 top-0 z-[100] h-14 w-full border-b bg-white">
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between">
           {/* Logo and navigation */}

@@ -1,20 +1,31 @@
-import { Role } from "@/schemas/user.schema"
+import { UserType } from "@/schemas/user.schema"
 import { type DefaultSession } from "next-auth"
-import { JWT } from "next-auth/jwt"
+// eslint-disable-next-line unused-imports/no-unused-imports, @typescript-eslint/no-unused-vars
+import "next-auth/jwt"
 
-export type ExtendedUser = DefaultSession["user"] & {
-  role: Role
-  isOAuth: boolean
-}
+export type ExtendedUser = DefaultSession["user"] & UserType
 
 declare module "next-auth" {
   interface Session {
     user: ExtendedUser
+    accessToken: string
+    refreshToken: string
+    expiredAt: string
+  }
+
+  interface User {
+    user: UserType
+    accessToken: string
+    refreshToken: string
+    expiredAt: string
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    role: Role
+    user: UserType
+    accessToken: string
+    refreshToken: string
+    expiredAt: string
   }
 }

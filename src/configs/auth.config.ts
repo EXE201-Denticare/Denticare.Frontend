@@ -1,11 +1,11 @@
 import { env } from "@/env"
-import { SignInSchema } from "@/schemas/auth.schema"
+import { SignInResType, SignInSchema } from "@/schemas/auth.schema"
 import type { NextAuthConfig } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import Github from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 
-import { db } from "@/lib/db"
+import api from "@/lib/api"
 
 export default {
   providers: [
@@ -24,13 +24,19 @@ export default {
         if (validatedFields.success) {
           const { email, password } = validatedFields.data
 
-          const user = await db.user.findFirst({ where: { email } })
+          try {
+            const { data } = await api.post<SignInResType>(
+              "/api/denticare/sign-in",
+              {
+                email,
+                password,
+              }
+            )
 
-          if (!user || !user.password) return null
-
-          const isValid = user.password === password
-
-          if (isValid) return { ...user, id: user.user_id }
+            return data.response
+          } catch (error) {
+            return null
+          }
         }
 
         return null

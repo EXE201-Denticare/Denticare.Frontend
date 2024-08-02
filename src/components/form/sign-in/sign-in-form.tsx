@@ -41,8 +41,8 @@ export default function SignInForm() {
   const form = useForm<SignInType>({
     resolver: zodResolver(SignInSchema),
     defaultValues: {
-      email: "nhatvmse172011@fpt.edu.vn",
-      password: "Password123!",
+      email: "nguyenvana@example.com",
+      password: "Matkhau123!",
     },
   })
 

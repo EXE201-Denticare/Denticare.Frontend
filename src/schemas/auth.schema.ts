@@ -1,5 +1,6 @@
 import * as z from "zod"
-import { Sex } from "@/schemas/user.schema"
+import { createCommonResSchema } from "@/schemas/common.schema"
+import { Sex, UserSchema } from "@/schemas/user.schema"
 
 export const SignInSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -54,3 +55,14 @@ export const SignUpOwnerSchema = z
   })
 
 export type SignUpOwnerType = z.infer<typeof SignUpOwnerSchema>
+
+export const SignInResSchema = createCommonResSchema(
+  z.object({
+    user: UserSchema,
+    accessToken: z.string(),
+    refreshToken: z.string(),
+    expiredAt: z.string(),
+  })
+)
+
+export type SignInResType = z.infer<typeof SignInResSchema>
