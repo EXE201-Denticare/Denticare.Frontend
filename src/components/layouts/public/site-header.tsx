@@ -1,12 +1,16 @@
 import Link from "next/link"
 
+import { auth } from "@/auth"
 import { ChevronRight } from "lucide-react"
 
 import { buttonVariants } from "@/components/ui/button"
 
 import MaxWidthWrapper from "@/components/layouts/max-width-wrapper"
+import UserButton from "@/components/layouts/public/user-button"
 
-function SiteHeader() {
+async function SiteHeader() {
+  const session = await auth()
+  const user = session?.user
   return (
     <header className="sticky inset-x-0 top-0 z-[100] h-14 w-full border-b bg-white">
       <MaxWidthWrapper>
@@ -29,21 +33,30 @@ function SiteHeader() {
           </div>
 
           {/* Auth button */}
-          <div className="flex items-center space-x-5">
-            <Link href="/auth/sign-in" className="text-sm hover:text-black/80">
-              Sign in
-            </Link>
-            <Link
-              href="/auth/sign-up"
-              className={buttonVariants({
-                className: "group flex items-center gap-x-1",
-                size: "sm",
-              })}
-            >
-              Become a member{" "}
-              <ChevronRight className="size-4 group-hover:translate-x-1" />
-            </Link>
-          </div>
+          {user ? (
+            <div className="flex items-center">
+              <UserButton user={user} />
+            </div>
+          ) : (
+            <div className="flex items-center space-x-5">
+              <Link
+                href="/auth/sign-in"
+                className="text-sm hover:text-black/80"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/auth/sign-up"
+                className={buttonVariants({
+                  className: "group flex items-center gap-x-1",
+                  size: "sm",
+                })}
+              >
+                Become a member{" "}
+                <ChevronRight className="size-4 group-hover:translate-x-1" />
+              </Link>
+            </div>
+          )}
         </div>
       </MaxWidthWrapper>
     </header>

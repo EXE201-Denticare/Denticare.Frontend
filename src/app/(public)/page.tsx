@@ -1,8 +1,6 @@
-import { auth, signOut } from "@/auth"
+import { auth } from "@/auth"
 import HeroSection from "@/containers/landing-page/hero-section"
 import { format } from "date-fns"
-
-import { Button } from "@/components/ui/button"
 
 export default async function Page() {
   const session = await auth()
@@ -10,7 +8,10 @@ export default async function Page() {
     <div className="h-[200vh]">
       <HeroSection />
       <h1>Xin chào 123 , đây là denticare </h1>
-      <p>Expires cookie {format(session?.expires, "yyyy-MM-dd HH:mm:ss")}</p>
+
+      {session?.expires && (
+        <p>Expires cookie {format(session?.expires, "yyyy-MM-dd HH:mm:ss")}</p>
+      )}
 
       <div className="p-10">
         <div className="overflow-x-auto">
@@ -85,31 +86,24 @@ export default async function Page() {
             </thead>
             <tbody>
               <tr>
-                <td className="line-clamp-1 w-[300px] text-wrap px-6 py-4 text-sm font-medium text-gray-900">
-                  {session?.accessToken}
+                <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                  <p className="text- w-[300px] overflow-auto">
+                    {session?.accessToken}
+                  </p>
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                   {session?.refreshToken}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                  {format(session?.expiredAt, "yyyy-MM-dd HH:mm:ss")}
+                  {session?.expiredAt && (
+                    <p>{format(session?.expiredAt, "yyyy-MM-dd HH:mm:ss")}</p>
+                  )}
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <form
-        action={async () => {
-          "use server"
-
-          await signOut({
-            redirectTo: "/auth/sign-in",
-          })
-        }}
-      >
-        <Button type="submit">Sign Out</Button>
-      </form>
     </div>
   )
 }
