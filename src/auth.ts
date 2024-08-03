@@ -1,5 +1,49 @@
 import authConfig from "@/configs/auth.config"
+import { SignInResType } from "@/schemas/auth.schema"
+import { format } from "date-fns"
+import { decode, JwtPayload } from "jsonwebtoken"
 import NextAuth from "next-auth"
+import { JWT } from "next-auth/jwt"
+
+import api from "@/lib/api"
+
+async function refreshAccessToken(token: JWT) {
+  try {
+    const res = await api.post("/api/denticare/refresh-token", {
+      refreshToken: token.refreshToken,
+      accessToken: token.accessToken,
+    })
+
+    const { response } = res.data as SignInResType
+    const { accessToken, refreshToken, expiredAt, user } = response
+
+    const tokens = {
+      accessToken,
+      refreshToken,
+    }
+
+    console.log("🔥⚠ New tokens received", tokens)
+
+    if (!(res.status === 200)) {
+      throw tokens
+    }
+
+    return {
+      ...token,
+      accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken ?? token.refreshToken,
+      expiredAt,
+      user,
+    }
+  } catch (error) {
+    console.log(error)
+
+    return {
+      ...token,
+      error: "RefreshAccessTokenError",
+    }
+  }
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
@@ -8,16 +52,40 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, account, user }) {
       // user is only available the first time a user signs in authorized
-      console.log("🔥 USER", user)
+
+      if (token.accessToken) {
+        const payload = decode(token.accessToken) as JwtPayload
+        if (payload.exp) {
+          token.accessTokenExpires = payload.exp * 1000
+          console.log(
+            "🔥 ACCESS TOKEN EXPIRES",
+            format(new Date(token.accessTokenExpires), "yyyy-MM-dd HH:mm:ss")
+          )
+        }
+      }
 
       if (account && user) {
         token.accessToken = user.accessToken
         token.refreshToken = user.refreshToken
         token.expiredAt = user.expiredAt
         token.user = user.user
+
+        return {
+          ...token,
+          accessToken: user.accessToken,
+          refreshToken: user.refreshToken,
+          expiredAt: user.expiredAt,
+          user: user.user,
+        }
       }
 
-      return token
+      if (Date.now() < token.accessTokenExpires) {
+        return token
+      }
+
+      // Access token has expired, try to update it
+      console.log("**** Update Refresh token ******")
+      return refreshAccessToken(token)
     },
     async session({ token, session }) {
       if (token.sub && session.user) {
