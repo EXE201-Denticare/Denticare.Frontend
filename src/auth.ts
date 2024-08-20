@@ -17,32 +17,50 @@ async function refreshAccessToken(token: JWT) {
     const { response } = res.data as SignInResType
     const { accessToken, refreshToken, expiredAt, user } = response
 
-    const tokens = {
+    const newTokens = {
       accessToken,
       refreshToken,
     }
 
-    console.log("🔥⚠ New tokens received", tokens)
+    const accessTokenExpires = getAccessTokenExpires(accessToken)
+
+    console.log("🔥 New tokens received", newTokens)
 
     if (!(res.status === 200)) {
-      throw tokens
+      throw newTokens
     }
 
     return {
       ...token,
-      accessToken: tokens.accessToken,
-      refreshToken: tokens.refreshToken ?? token.refreshToken,
+      accessToken: newTokens.accessToken,
+      refreshToken: newTokens.refreshToken ?? token.refreshToken,
+      accessTokenExpires: accessTokenExpires ?? token.accessTokenExpires,
       expiredAt,
       user,
     }
   } catch (error) {
-    console.log(error)
+    console.log("🔥 Refresh token error", error)
 
     return {
       ...token,
       error: "RefreshAccessTokenError",
     }
   }
+}
+
+function getAccessTokenExpires(accessToken: string): number | null {
+  const payload = decode(accessToken) as JwtPayload
+
+  if (payload && payload.exp) {
+    const accessTokenExpires = payload.exp * 1000 // Convert to milliseconds
+    console.log(
+      "🔥 ACCESS TOKEN EXPIRES",
+      format(new Date(accessTokenExpires), "yyyy-MM-dd HH:mm:ss")
+    )
+    return accessTokenExpires
+  }
+
+  return null
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -53,18 +71,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, account, user }) {
       // user is only available the first time a user signs in authorized
 
+      // Check if user is logged in with google
+      // if (account?.provider === "google" && user) {
+      //   token.user.fullName = user.name ?? ""
+      //   token.user.email = user.email ?? ""
+      //   token.user.image = user.image ?? ""
+      //   token.user.id = user.id ?? ""
+
+      //   return { token }
+      // }
+
       if (token.accessToken) {
-        const payload = decode(token.accessToken) as JwtPayload
-        if (payload.exp) {
-          token.accessTokenExpires = payload.exp * 1000
-          console.log(
-            "🔥 ACCESS TOKEN EXPIRES",
-            format(new Date(token.accessTokenExpires), "yyyy-MM-dd HH:mm:ss")
-          )
+        const accessTokenExpires = getAccessTokenExpires(token.accessToken)
+        if (accessTokenExpires) {
+          token.accessTokenExpires = accessTokenExpires
         }
       }
 
-      if (account && user) {
+      // Run the first time a user signs in with credentials
+      if (account?.provider === "credentials" && user) {
         token.accessToken = user.accessToken
         token.refreshToken = user.refreshToken
         token.expiredAt = user.expiredAt
@@ -76,10 +101,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           refreshToken: user.refreshToken,
           expiredAt: user.expiredAt,
           user: user.user,
+          accessTokenExpires: token.accessTokenExpires,
         }
       }
 
-      if (Date.now() < token.accessTokenExpires) {
+      // Calculate expiration time and remaining time
+      const refreshThreshold = 5 * 60 * 1000 // 5 minutes before the token expires
+      const refreshTimeInSeconds = Math.max(
+        0,
+        Math.floor(
+          (token.accessTokenExpires - Date.now() - refreshThreshold) / 1000
+        )
+      )
+
+      if (refreshTimeInSeconds > 0) {
         return token
       }
 
@@ -102,6 +137,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       if (token.expiredAt && session.user) {
         session.expiredAt = token.expiredAt
+      }
+
+      if (token.accessTokenExpires && session.user) {
+        session.accessTokenExpires = token.accessTokenExpires
       }
 
       if (token.user && session.user) {

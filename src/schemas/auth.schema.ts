@@ -1,5 +1,4 @@
 import * as z from "zod"
-import { createCommonResSchema } from "@/schemas/common.schema"
 import { Sex, UserSchema } from "@/schemas/user.schema"
 
 export const SignInSchema = z.object({
@@ -56,13 +55,11 @@ export const SignUpOwnerSchema = z
 
 export type SignUpOwnerType = z.infer<typeof SignUpOwnerSchema>
 
-export const SignInResSchema = createCommonResSchema(
-  z.object({
-    user: UserSchema,
-    accessToken: z.string(),
-    refreshToken: z.string(),
-    expiredAt: z.string(),
-  })
-)
+export const SignInResSchema = z.object({
+  user: UserSchema,
+  accessToken: z.string(),
+  refreshToken: z.string(),
+  expiredAt: z.string(),
+})
 
-export type SignInResType = z.infer<typeof SignInResSchema>
+export type SignInResType = IBackendRes<z.infer<typeof SignInResSchema>>

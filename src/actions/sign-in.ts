@@ -27,6 +27,8 @@ export async function signIn({ values, callbackUrl }: Props) {
       password,
       redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     })
+
+    return
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {

@@ -10,6 +10,7 @@ declare module "next-auth" {
     user: ExtendedUser
     accessToken: string
     refreshToken: string
+    accessTokenExpires: number
     expiredAt: string
   }
 
@@ -17,6 +18,7 @@ declare module "next-auth" {
     user: UserType
     accessToken: string
     refreshToken: string
+    accessTokenExpires: number
     expiredAt: string
   }
 }

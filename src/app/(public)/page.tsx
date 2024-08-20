@@ -77,6 +77,9 @@ export default async function Page() {
                   Access Token
                 </th>
                 <th className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Access Token Expired At
+                </th>
+                <th className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                   Refresh Token
                 </th>
                 <th className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
@@ -90,6 +93,16 @@ export default async function Page() {
                   <p className="text- w-[300px] overflow-auto">
                     {session?.accessToken}
                   </p>
+                </td>
+                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                  {session?.accessTokenExpires && (
+                    <p>
+                      {format(
+                        new Date(session?.accessTokenExpires),
+                        "yyyy-MM-dd HH:mm:ss"
+                      )}
+                    </p>
+                  )}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                   {session?.refreshToken}

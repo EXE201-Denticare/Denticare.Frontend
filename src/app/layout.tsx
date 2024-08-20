@@ -2,10 +2,10 @@ import { Plus_Jakarta_Sans as FontSans } from "next/font/google"
 
 import { auth } from "@/auth"
 import { constructMetadata } from "@/configs/site"
+import AuthProvider from "@/providers/auth-provider"
 import { ReactQueryClientProvider } from "@/providers/react-query-client-provider"
 import { ThemeProvider } from "@/providers/theme-provider"
 import TailwindIndicator from "@/tools/tailwind-indicator"
-import { SessionProvider } from "next-auth/react"
 
 import { cn } from "@/lib/utils"
 
@@ -28,14 +28,14 @@ export default async function RootLayout({
 }>) {
   const session = await auth()
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-white font-sans antialiased",
           fontSans.variable
         )}
       >
-        <SessionProvider session={session}>
+        <AuthProvider session={session}>
           <ReactQueryClientProvider>
             <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
               <Toaster position="top-right" />
@@ -45,7 +45,7 @@ export default async function RootLayout({
               <TailwindIndicator />
             </ThemeProvider>
           </ReactQueryClientProvider>
-        </SessionProvider>
+        </AuthProvider>
       </body>
     </html>
   )
