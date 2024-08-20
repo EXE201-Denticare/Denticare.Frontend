@@ -124,7 +124,7 @@ export default function SignInForm() {
           Sign in
         </Button>
 
-        <SocialSection />
+        <SocialSection isLoading={isPending} />
 
         <div className="flex items-center justify-center text-sm">
           <span className="text-dark-600">New to Denticare?</span>

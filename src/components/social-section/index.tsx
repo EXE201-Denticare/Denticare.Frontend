@@ -9,7 +9,10 @@ import { FcGoogle } from "react-icons/fc"
 
 import { Button } from "@/components/ui/button"
 
-export const SocialSection = () => {
+type Props = {
+  isLoading: boolean
+}
+export const SocialSection = ({ isLoading }: Props) => {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get("callbackUrl")
 
@@ -22,6 +25,7 @@ export const SocialSection = () => {
   return (
     <div className="flex w-full items-center gap-x-2">
       <Button
+        disabled={isLoading}
         type="button"
         size="lg"
         className="w-full"
@@ -31,6 +35,7 @@ export const SocialSection = () => {
         <FcGoogle className="size-5" />
       </Button>
       <Button
+        disabled={isLoading}
         type="button"
         size="lg"
         className="w-full"

@@ -12,7 +12,9 @@ export const logout = async () => {
   try {
     await api.post("/api/denticare/sign-out", { accessToken, refreshToken })
   } catch (error) {
-    return
+    return { error: "An unexpected error occurred while signing out." }
   }
   await signOut({ redirectTo: "/auth/sign-in" })
+
+  return { success: "Logged out successfully!" }
 }
