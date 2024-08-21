@@ -4,7 +4,7 @@ import React, { useTransition } from "react"
 
 import { useRouter } from "next/navigation"
 
-import { logout } from "@/actions/logout"
+import { logout } from "@/actions/auth/logout"
 import { UserType } from "@/schemas/user.schema"
 import { History, LogOut, Settings } from "lucide-react"
 import { toast } from "sonner"
