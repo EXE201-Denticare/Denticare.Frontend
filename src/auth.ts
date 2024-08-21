@@ -1,6 +1,5 @@
 import authConfig from "@/configs/auth.config"
 import { SignInResType } from "@/schemas/auth.schema"
-import { format } from "date-fns"
 import { decode, JwtPayload } from "jsonwebtoken"
 import NextAuth from "next-auth"
 import { JWT } from "next-auth/jwt"
@@ -24,11 +23,7 @@ async function refreshAccessToken(token: JWT) {
 
     const accessTokenExpires = getAccessTokenExpires(accessToken)
 
-    console.log("🔥 New tokens received", newTokens)
-
-    if (!(res.status === 200)) {
-      throw newTokens
-    }
+    console.log("🔥 New tokens received")
 
     return {
       ...token,
@@ -53,10 +48,7 @@ function getAccessTokenExpires(accessToken: string): number | null {
 
   if (payload && payload.exp) {
     const accessTokenExpires = payload.exp * 1000 // Convert to milliseconds
-    console.log(
-      "🔥 ACCESS TOKEN EXPIRES",
-      format(new Date(accessTokenExpires), "yyyy-MM-dd HH:mm:ss")
-    )
+
     return accessTokenExpires
   }
 

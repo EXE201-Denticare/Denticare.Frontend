@@ -2,6 +2,8 @@
 
 import React, { useTransition } from "react"
 
+import { useRouter } from "next/navigation"
+
 import { logout } from "@/actions/logout"
 import { UserType } from "@/schemas/user.schema"
 import { History, LogOut, Settings } from "lucide-react"
@@ -18,10 +20,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import LogoutDialog from "@/components/dialog/logout-dialog"
+import LogoutModal from "@/components/modal/logout-modal"
 
 export default function UserButton({ user }: { user: UserType }) {
   const [isPending, startTransition] = useTransition()
+  const router = useRouter()
 
   async function onLogout() {
     startTransition(() => {
@@ -38,11 +41,11 @@ export default function UserButton({ user }: { user: UserType }) {
   }
   return (
     <React.Fragment>
-      <LogoutDialog isLoading={isPending} />
+      <LogoutModal isLoading={isPending} />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="size-9 cursor-pointer">
-            <AvatarImage src={user?.image} />
+            <AvatarImage src={user?.image ?? "/assets/avatar/avatar.jpg"} />
             <AvatarFallback>Ava</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
@@ -59,7 +62,10 @@ export default function UserButton({ user }: { user: UserType }) {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem className="flex items-center">
+            <DropdownMenuItem
+              className="flex items-center"
+              onClick={() => router.push("/account/me")}
+            >
               <Settings className="mr-2 size-4" />
               Cài đặt thông tin
             </DropdownMenuItem>

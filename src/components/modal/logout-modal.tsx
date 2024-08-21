@@ -6,7 +6,7 @@ type Props = {
   isLoading: boolean
 }
 
-export default function LogoutDialog({ isLoading }: Props) {
+export default function LogoutModal({ isLoading }: Props) {
   return (
     <Dialog open={isLoading}>
       <DialogContent className="w-80">

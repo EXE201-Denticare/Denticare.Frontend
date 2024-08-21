@@ -43,7 +43,7 @@ async function SiteHeader() {
                 href="/auth/sign-in"
                 className="text-sm hover:text-black/80"
               >
-                Sign in
+                Đăng nhập
               </Link>
               <Link
                 href="/auth/sign-up"
@@ -52,7 +52,7 @@ async function SiteHeader() {
                   size: "sm",
                 })}
               >
-                Become a member{" "}
+                Trờ thành thành viên
                 <ChevronRight className="size-4 group-hover:translate-x-1" />
               </Link>
             </div>
