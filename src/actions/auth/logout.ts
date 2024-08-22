@@ -2,7 +2,7 @@
 
 import { auth, signOut } from "@/auth"
 
-import api from "@/lib/api"
+import { apiServer } from "@/lib/api"
 
 export const logout = async () => {
   const session = await auth()
@@ -10,7 +10,10 @@ export const logout = async () => {
 
   const { accessToken, refreshToken } = session
   try {
-    await api.post("/api/denticare/sign-out", { accessToken, refreshToken })
+    await apiServer().post("/api/denticare/sign-out", {
+      accessToken,
+      refreshToken,
+    })
   } catch (error) {
     return { error: "An unexpected error occurred while signing out." }
   }

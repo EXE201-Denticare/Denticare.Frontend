@@ -5,7 +5,7 @@ import Credentials from "next-auth/providers/credentials"
 import Github from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 
-import api from "@/lib/api"
+import { apiServer } from "@/lib/api"
 
 export default {
   providers: [
@@ -25,7 +25,7 @@ export default {
           const { email, password } = validatedFields.data
 
           try {
-            const { data } = await api.post<SignInResType>(
+            const { data } = await apiServer().post<SignInResType>(
               "/api/denticare/sign-in",
               {
                 email,

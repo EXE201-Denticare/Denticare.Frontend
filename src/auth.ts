@@ -4,11 +4,11 @@ import { decode, JwtPayload } from "jsonwebtoken"
 import NextAuth from "next-auth"
 import { JWT } from "next-auth/jwt"
 
-import api from "@/lib/api"
+import { apiServer } from "@/lib/api"
 
 async function refreshAccessToken(token: JWT) {
   try {
-    const res = await api.post("/api/denticare/refresh-token", {
+    const res = await apiServer().post("/api/denticare/refresh-token", {
       refreshToken: token.refreshToken,
       accessToken: token.accessToken,
     })
