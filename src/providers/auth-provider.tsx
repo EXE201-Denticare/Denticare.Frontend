@@ -12,7 +12,6 @@ type AuthProviderProps = {
 
 export default function AuthProvider({ children, session }: AuthProviderProps) {
   const [interval, setInterval] = useState(0)
-  console.log("🔥 Second before refresh token", interval)
   return (
     <SessionProvider session={session} refetchInterval={interval}>
       {children}
@@ -40,8 +39,6 @@ const RefreshTokenHandler = ({
       const refreshThreshold = 5 * 60 * 1000
       const refreshTime = timeRemaining - refreshThreshold
       const refreshTimeInSeconds = Math.max(0, Math.floor(refreshTime / 1000))
-
-      console.log("🔥 Second before refresh token", refreshTimeInSeconds)
 
       setInterval(refreshTimeInSeconds)
     } else {
