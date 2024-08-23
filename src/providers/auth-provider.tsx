@@ -69,9 +69,7 @@ const RefreshTokenHandler = ({
       setInterval(0)
     }
 
-    return () => {
-      setInterval(0)
-    }
+    return () => {}
   }, [session, setInterval])
 
   return null

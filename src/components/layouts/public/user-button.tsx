@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 
 import { logout } from "@/actions/auth/logout"
 import { UserType } from "@/schemas/user.schema"
-import { History, LogOut, Settings } from "lucide-react"
+import { History, LogOut, MenuIcon, Settings } from "lucide-react"
 import { toast } from "sonner"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -44,10 +44,13 @@ export default function UserButton({ user }: { user: UserType }) {
       <LogoutModal isLoading={isPending} />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="size-9 cursor-pointer">
-            <AvatarImage src={user?.image ?? "/assets/avatar/avatar.jpg"} />
-            <AvatarFallback>Ava</AvatarFallback>
-          </Avatar>
+          <div className="flex cursor-pointer items-center space-x-2 rounded-full border-2 px-2 py-1">
+            <MenuIcon className="size-4 text-muted-foreground" />
+            <Avatar className="size-8">
+              <AvatarImage src={user?.image ?? "/assets/avatar/avatar.jpg"} />
+              <AvatarFallback>Ava</AvatarFallback>
+            </Avatar>
+          </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mt-2 w-56" align="end">
           <DropdownMenuLabel className="font-normal">
