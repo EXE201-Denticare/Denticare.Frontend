@@ -135,6 +135,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.accessTokenExpires = token.accessTokenExpires
       }
 
+      if (token.error && session.user) {
+        session.error = token.error
+      }
+
       if (token.user && session.user) {
         session.user.fullName = token.user.fullName
         session.user.email = token.user.email
