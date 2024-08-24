@@ -6,6 +6,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -218,7 +219,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeftIcon className="size-4" />
+      <ChevronLeft className="size-4" />
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -247,7 +248,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRightIcon className="size-4" />
+      <ChevronRight className="size-4" />
       <span className="sr-only">Next slide</span>
     </Button>
   )

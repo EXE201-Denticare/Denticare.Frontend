@@ -50,7 +50,7 @@ export default function UserButton({ user }: { user: UserType }) {
       <LogoutModal isLoading={isPending} />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className="flex cursor-pointer items-center space-x-2 rounded-full border-2 px-2 py-1">
+          <div className="flex cursor-pointer items-center space-x-2 rounded-full border-2 px-2 py-1 hover:shadow-md">
             <MenuIcon className="size-4 text-muted-foreground" />
             <Avatar className="size-8">
               <AvatarImage src={user?.image ?? "/assets/avatar/avatar.jpg"} />

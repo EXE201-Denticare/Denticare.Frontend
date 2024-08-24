@@ -83,6 +83,9 @@ importers:
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
+      embla-carousel-autoplay:
+        specifier: ^8.1.7
+        version: 8.1.7(embla-carousel@8.1.7)
       embla-carousel-react:
         specifier: ^8.1.7
         version: 8.1.7(react@18.3.1)
@@ -146,6 +149,9 @@ importers:
       tailwind-merge:
         specifier: ^2.4.0
         version: 2.4.0
+      tailwind-scrollbar-hide:
+        specifier: ^1.1.7
+        version: 1.1.7
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.6)
@@ -1640,6 +1646,11 @@ packages:
   ecdsa-sig-formatter@1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
 
+  embla-carousel-autoplay@8.1.7:
+    resolution: {integrity: sha512-UXt1XvCNwzC/Sqd7iU8nYd1CjuDLweIwJClfBL3gVTzHQBVwb68GBBfC/oPFsEeIWNUZe8NO5xDQSI9aTnYO7Q==}
+    peerDependencies:
+      embla-carousel: 8.1.7
+
   embla-carousel-react@8.1.7:
     resolution: {integrity: sha512-ermMKzQ46LhXE4f81VBCVGxCJWvZfsu504dkyiUDO+cnEEPW8NlC2PpKULmiOWugusYWRLhQLjmyQs3b8vvOjA==}
     peerDependencies:
@@ -3080,6 +3091,9 @@ packages:
 
   tailwind-merge@2.4.0:
     resolution: {integrity: sha512-49AwoOQNKdqKPd9CViyH5wJoSKsCDjUlzL8DxuGp3P1FsGY36NJDAa18jLZcaHAUUuTj+JB8IAo8zWgBNvBF7A==}
+
+  tailwind-scrollbar-hide@1.1.7:
+    resolution: {integrity: sha512-X324n9OtpTmOMqEgDUEA/RgLrNfBF/jwJdctaPZDzB3mppxJk7TLIDmOreEDm1Bq4R9LSPu4Epf8VSdovNU+iA==}
 
   tailwindcss-animate@1.0.7:
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
@@ -4799,6 +4813,10 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
+  embla-carousel-autoplay@8.1.7(embla-carousel@8.1.7):
+    dependencies:
+      embla-carousel: 8.1.7
+
   embla-carousel-react@8.1.7(react@18.3.1):
     dependencies:
       embla-carousel: 8.1.7
@@ -6320,6 +6338,8 @@ snapshots:
   tabbable@6.2.0: {}
 
   tailwind-merge@2.4.0: {}
+
+  tailwind-scrollbar-hide@1.1.7: {}
 
   tailwindcss-animate@1.0.7(tailwindcss@3.4.6):
     dependencies:
