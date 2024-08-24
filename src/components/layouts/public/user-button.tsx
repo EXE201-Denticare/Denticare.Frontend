@@ -31,11 +31,17 @@ export default function UserButton({ user }: { user: UserType }) {
       logout()
         .then((data) => {
           if (data?.error) {
-            toast.error(data.error)
+            toast.error("Đã xảy ra lỗi khi đăng xuất.", {
+              description:
+                "Vui lòng thử lại. Nếu vấn đề vẫn tiếp diễn, hãy liên hệ với bộ phận hỗ trợ.",
+            })
           }
         })
         .catch(() => {
-          toast.error("An unexpected error occurred while signing out.")
+          toast.error("Đã xảy ra lỗi khi đăng xuất.", {
+            description:
+              "Vui lòng thử lại. Nếu vấn đề vẫn tiếp diễn, hãy liên hệ với bộ phận hỗ trợ.",
+          })
         })
     })
   }

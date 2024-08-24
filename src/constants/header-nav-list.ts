@@ -3,7 +3,7 @@ export function getHeaderNavList(pathName: string) {
     {
       lable: "Trang chủ",
       href: "/",
-      isActive: pathName.includes("/"),
+      isActive: pathName === "/",
     },
     {
       lable: "Trang 2",

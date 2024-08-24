@@ -56,7 +56,7 @@ function SiteHeader() {
               className={cn(
                 "whitespace-nowrap rounded-full px-4 py-1.5 font-[500] text-black/60",
                 item.isActive
-                  ? "text-black/85"
+                  ? "text-black"
                   : "hover:bg-zinc-100 hover:text-black"
               )}
             >

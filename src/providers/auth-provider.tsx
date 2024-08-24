@@ -1,10 +1,9 @@
 "use client"
 
-import React, { useEffect, useState, useTransition } from "react"
+import React, { useEffect, useState } from "react"
 
-import { logout } from "@/actions/auth/logout"
 import { Session } from "next-auth"
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider, signOut } from "next-auth/react"
 import { toast } from "sonner"
 
 type AuthProviderProps = {
@@ -31,29 +30,15 @@ const RefreshTokenHandler = ({
   setInterval,
   session,
 }: RefreshTokenHandlerProps) => {
-  // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
-  const [isPending, startTransition] = useTransition()
-
-  async function onLogout() {
-    startTransition(() => {
-      logout()
-        .then((data) => {
-          if (data?.error) {
-            toast.error(data.error)
-          }
-        })
-        .catch(() => {
-          toast.error("An unexpected error occurred while signing out.")
-        })
-    })
-  }
-
   useEffect(() => {
     if (session?.error === "RefreshAccessTokenError") {
       toast.error("Làm mới phiên đăng nhập thât bại!", {
         description: "Vui lòng đăng nhập lại ",
       })
-      onLogout()
+      signOut({
+        callbackUrl: "/auth/sign-in",
+        redirect: true,
+      })
     } else if (session && session.accessTokenExpires) {
       const expirationTime = new Date(session.accessTokenExpires).getTime()
       const currentTime = Date.now()

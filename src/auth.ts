@@ -107,6 +107,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       )
 
       if (refreshTimeInSeconds > 0) {
+        console.log(">>>>Keep current token")
         return token
       }
 
