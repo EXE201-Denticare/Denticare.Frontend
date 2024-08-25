@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 import Image from "next/image"
 import Link from "next/link"
@@ -21,11 +21,14 @@ import UserButton from "@/components/layouts/public/user-button"
 
 function SiteHeader() {
   const { session, status } = useCurrentSession()
+
   const [hasCheckedAuth, setHasCheckedAuth] = useState(false)
 
   const user = session?.user
+
   const pathname = usePathname()
-  const navList = getHeaderNavList(pathname)
+
+  const navList = useMemo(() => getHeaderNavList(pathname), [pathname])
 
   useEffect(() => {
     if (status !== "loading") {
@@ -66,10 +69,9 @@ function SiteHeader() {
         </div>
 
         <div className="flex items-center justify-end">
-          {!hasCheckedAuth || status === "loading" ? (
-            <div className="flex space-x-2">
-              <Skeleton className="h-8 w-24" />
-              <Skeleton className="h-8 w-16 rounded-full" />
+          {!user && (status === "loading" || !hasCheckedAuth) ? (
+            <div className="">
+              <Skeleton className="h-10 w-16 rounded-full" />
             </div>
           ) : user ? (
             <UserButton user={user} />

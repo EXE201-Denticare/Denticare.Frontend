@@ -6,9 +6,9 @@ export function getHeaderNavList(pathName: string) {
       isActive: pathName === "/",
     },
     {
-      lable: "Trang 2",
-      href: "#",
-      isActive: pathName.includes("#"),
+      lable: "Tìm Kiếm",
+      href: "/search",
+      isActive: pathName.includes("search"),
     },
     {
       lable: "Trang 3",

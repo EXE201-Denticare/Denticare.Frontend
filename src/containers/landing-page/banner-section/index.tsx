@@ -11,9 +11,8 @@ export default function BannerSection() {
         <Image
           src="/assets/sliders/slider2.jpg"
           alt="banner"
-          layout="fill"
-          objectFit="cover"
           className="rounded-xl"
+          fill
         />
       </div>
     </MaxWidthWrapper>
