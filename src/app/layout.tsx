@@ -1,7 +1,7 @@
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google"
 
 import { auth } from "@/auth"
-import { constructMetadata } from "@/configs/site"
+import { constructMetadata } from "@/configs/site.config"
 import AuthProvider from "@/providers/auth-provider"
 import { ReactQueryClientProvider } from "@/providers/react-query-client-provider"
 import { ThemeProvider } from "@/providers/theme-provider"

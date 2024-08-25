@@ -1,4 +1,4 @@
-export const publicRoutes = ["/"]
+export const publicRoutes = ["/", "/clinic"]
 
 export const authRoutes = ["/auth/sign-in", "/auth/sign-up"]
 

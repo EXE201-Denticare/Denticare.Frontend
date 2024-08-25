@@ -1,7 +1,7 @@
 "use server"
 
 import { signIn as signInAuthJS } from "@/auth"
-import { DEFAULT_LOGIN_REDIRECT } from "@/configs/routes"
+import { DEFAULT_LOGIN_REDIRECT } from "@/configs/route.config"
 import { SignInSchema, SignInType } from "@/schemas/auth.schema"
 import { AuthError } from "next-auth"
 
