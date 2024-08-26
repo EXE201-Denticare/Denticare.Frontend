@@ -1,16 +1,14 @@
-import React from "react"
-
 import Image from "next/image"
+import Link from "next/link"
 
-import { StarFilledIcon } from "@radix-ui/react-icons"
 import { ChevronRight } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 
-import { Icons } from "@/components/icons"
 import MaxWidthWrapper from "@/components/layouts/max-width-wrapper"
+import RatingCard from "@/components/rating-card"
 
 export default function Page({ params }: { params: { clinicId: string } }) {
   return (
@@ -63,45 +61,24 @@ export default function Page({ params }: { params: { clinicId: string } }) {
 
           {/* Rating section */}
           <div className="w-full space-y-4 lg:w-1/3">
-            <Card className="w-full p-4">
-              <div className="grid grid-cols-2 gap-x-5">
-                <div className="flex items-center px-2">
-                  <Icons.leftWing className="size-[40px]" />
-                  <p className="text-pretty text-center text-xs font-semibold">
-                    Một trong những nha khoa được yêu thích nhất tại Denticare
-                  </p>
-                  <Icons.rightWing className="size-[40px]" />
-                </div>
-                <div className="flex items-center justify-end">
-                  <div className="flex flex-col items-center">
-                    <h1 className="text-xl font-semibold">4.5</h1>
-                    <div className="flex gap-x-0.5">
-                      {Array.from({ length: 5 }).map((_, index) => (
-                        <StarFilledIcon
-                          key={index}
-                          className="size-3 text-black"
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <Separator orientation="vertical" className="mx-4" />
-
-                  <div className="flex flex-col items-center">
-                    <h1 className="text-xl font-semibold">86</h1>
-                    <p className="text-nowrap text-xs">Đánh giá</p>
-                  </div>
-                </div>
-              </div>
-            </Card>
+            <RatingCard rating={3.5} feedbackCount={100} />
 
             {/* Booking section */}
             <Card className="w-full p-4 shadow-md">
               <h1>Thời gian làm việc</h1>
-              <Button className="flex w-full items-center" size={"lg"}>
+              <Link
+                href={{
+                  pathname: "/book-appointment",
+                  query: { clinicId: params.clinicId },
+                }}
+                className={buttonVariants({
+                  size: "lg",
+                  className: "flex w-full items-center",
+                })}
+              >
                 Đặt lịch ngay
                 <ChevronRight className="ml-2 size-4" />
-              </Button>
+              </Link>
             </Card>
           </div>
         </div>
