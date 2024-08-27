@@ -2,6 +2,7 @@
 
 import React from "react"
 
+import ChooseDateSection from "@/containers/book-appointment-page/choose-date-section"
 import ChooseServiceSection from "@/containers/book-appointment-page/choose-service-section"
 import { CalendarCheck, Clock, LayoutList } from "lucide-react"
 
@@ -35,7 +36,7 @@ export default function BookingStepperSection() {
           if (index === 1) {
             return (
               <Step key={stepProps.label} {...stepProps}>
-                <p>Step 2</p>
+                <ChooseDateSection />
               </Step>
             )
           }
