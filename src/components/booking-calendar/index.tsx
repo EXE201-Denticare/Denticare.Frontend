@@ -6,6 +6,7 @@ import {
   add,
   eachDayOfInterval,
   endOfMonth,
+  endOfWeek,
   format,
   getDay,
   isEqual,
@@ -15,6 +16,7 @@ import {
   parse,
   parseISO,
   startOfToday,
+  startOfWeek,
 } from "date-fns"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -29,10 +31,15 @@ export default function BookingCalendar() {
   )
   const [selectedDay, setSelectedDay] = React.useState<Date>(today)
   const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date())
+  const startOfCalendar = startOfWeek(firstDayCurrentMonth, { weekStartsOn: 1 })
+  const endOfCalendar = endOfWeek(endOfMonth(firstDayCurrentMonth), {
+    weekStartsOn: 1,
+  })
 
+  // Get all the days for the calendar view
   const days = eachDayOfInterval({
-    start: firstDayCurrentMonth,
-    end: endOfMonth(firstDayCurrentMonth),
+    start: startOfCalendar,
+    end: endOfCalendar,
   })
 
   function previousMonth() {
@@ -50,37 +57,44 @@ export default function BookingCalendar() {
       <div className="px-4 sm:px-7 md:max-w-4xl md:px-6">
         <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
           <div className="md:pr-14">
-            <div className="flex items-center justify-between">
-              <Button
-                variant="outline"
-                className=""
-                onClick={() => {
-                  setSelectedDay(today)
-                  setCurrentMonth(format(today, "MMM-yyyy"))
-                }}
-              >
-                Today
-              </Button>
-              <div className="flex space-x-2">
-                <h2 className="font-semibold text-gray-900">
-                  {format(firstDayCurrentMonth, "MMMM yyyy")}
-                </h2>
-                <button
+            <div className="flex items-center">
+              <h2 className="flex-auto font-semibold text-gray-900">
+                {format(firstDayCurrentMonth, "MMMM yyyy")}
+              </h2>
+
+              <div className="flex items-center space-x-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className=""
+                  onClick={() => {
+                    setSelectedDay(today)
+                    setCurrentMonth(format(today, "MMM-yyyy"))
+                  }}
+                >
+                  Today
+                </Button>
+                <Button
+                  disabled={currentMonth === format(today, "MMM-yyyy")}
+                  variant="ghost"
+                  size="sm"
                   type="button"
                   onClick={previousMonth}
                   className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
                 >
                   <span className="sr-only">Previous month</span>
                   <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-                </button>
-                <button
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={nextMonth}
                   type="button"
                   className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
                 >
                   <span className="sr-only">Next month</span>
                   <ChevronRight className="h-5 w-5" aria-hidden="true" />
-                </button>
+                </Button>
               </div>
             </div>
             <div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
