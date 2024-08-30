@@ -2,9 +2,8 @@
 
 import { useState } from "react"
 
-import { useRouter } from "next/navigation"
-
 import { ChevronRight } from "lucide-react"
+import { useRouter } from "nextjs-toploader/app"
 
 import { useCurrentSession } from "@/hooks/useCurrentSession"
 

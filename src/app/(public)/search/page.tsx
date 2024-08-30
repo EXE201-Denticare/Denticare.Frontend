@@ -1,8 +1,9 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 
 import SearchResultCard from "@/containers/search-page/search-result-card"
+import { useRouter } from "nextjs-toploader/app"
 
 import MaxWidthWrapper from "@/components/layouts/max-width-wrapper"
 

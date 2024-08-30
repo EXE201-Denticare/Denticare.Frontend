@@ -1,10 +1,10 @@
 import React from "react"
 
 import Image from "next/image"
-import { useRouter } from "next/navigation"
 
 import { StarFilledIcon } from "@radix-ui/react-icons"
 import { ChevronRight } from "lucide-react"
+import { useRouter } from "nextjs-toploader/app"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"

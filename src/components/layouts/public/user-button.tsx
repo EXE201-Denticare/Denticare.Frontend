@@ -2,14 +2,13 @@
 
 import React, { useTransition } from "react"
 
-import { useRouter } from "next/navigation"
-
 import { logout } from "@/actions/auth/logout"
 import { UserType } from "@/schemas/user.schema"
-import { History, LogOut, MenuIcon, Settings } from "lucide-react"
+import { History, LogOut, Settings } from "lucide-react"
+import { useRouter } from "nextjs-toploader/app"
 import { toast } from "sonner"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -50,13 +49,9 @@ export default function UserButton({ user }: { user: UserType }) {
       <LogoutModal isLoading={isPending} />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className="flex cursor-pointer items-center space-x-2 rounded-full border-2 px-2 py-1 hover:shadow-md">
-            <MenuIcon className="size-4 text-muted-foreground" />
-            <Avatar className="size-8">
-              <AvatarImage src={user?.image ?? "/assets/avatar/avatar.jpg"} />
-              <AvatarFallback>Ava</AvatarFallback>
-            </Avatar>
-          </div>
+          <Avatar className="size-10 cursor-pointer shadow-sm">
+            <AvatarImage src={user?.image ?? "/assets/avatar/avatar.jpg"} />
+          </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mt-2 w-56" align="end">
           <DropdownMenuLabel className="font-normal">

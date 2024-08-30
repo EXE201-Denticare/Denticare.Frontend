@@ -23,17 +23,16 @@ export default function CustomerClinicCard({ clinic }: Props) {
         />
       </div>
       <div className="mt-3 flex flex-col items-baseline">
-        <div className="mb-2 flex w-full items-center justify-between">
-          <span className="whitespace-nowrap rounded-lg bg-blue-100 px-2 py-1.5 text-xs font-bold text-blue-700">
-            Được khách hàng yêu thích
-          </span>
+        <div className="mb-1 flex w-full items-center">
+          <h2 className="line-clamp-1 flex-auto text-lg font-semibold">
+            {clinic.name} abc xyz 123
+          </h2>
           <div className="flex flex-nowrap items-center">
             <StarFilledIcon className="size-4 text-yellow-400" />
             <span className="ml-2 text-sm text-gray-500">{clinic.rating}</span>
           </div>
         </div>
 
-        <h2 className="text-xl font-semibold">{clinic.name}</h2>
         <p className="text-sm text-muted-foreground">{clinic.address}</p>
       </div>
     </div>
