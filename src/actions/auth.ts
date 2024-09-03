@@ -1,6 +1,6 @@
 "use server"
 
-import { signIn as signInAuthJS } from "@/auth"
+import { auth, signIn as signInAuthJS, signOut } from "@/auth"
 import { DEFAULT_LOGIN_REDIRECT } from "@/configs/route.config"
 import { SignInSchema, SignInType } from "@/schemas/auth.schema"
 import { AuthError } from "next-auth"
@@ -43,4 +43,22 @@ export async function signIn({ values, callbackUrl }: Props) {
 
     throw error
   }
+}
+
+export async function logOut() {
+  const session = await auth()
+  if (!session) return
+
+  const { accessToken, refreshToken } = session
+  try {
+    // await apiServer().post("/api/denticare/sign-out", {
+    //   accessToken,
+    //   refreshToken,
+    // })
+  } catch (error) {
+    return { error: "An unexpected error occurred while signing out." }
+  }
+  await signOut({ redirectTo: "/auth/sign-in" })
+
+  return { success: "Logged out successfully!" }
 }

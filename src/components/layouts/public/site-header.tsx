@@ -37,7 +37,7 @@ function SiteHeader() {
   }, [status])
 
   return (
-    <header className="sticky inset-x-0 top-0 z-[50] flex h-20 w-full bg-white py-5 shadow-md">
+    <header className="sticky inset-x-0 top-0 z-[50] flex h-20 w-full border-b bg-white py-5">
       <MaxWidthWrapper className="grid h-full w-full grid-cols-2 md:grid-cols-3">
         <div className="flex items-center">
           <Link href="/">
@@ -71,7 +71,7 @@ function SiteHeader() {
         <div className="flex items-center justify-end">
           {!user && (status === "loading" || !hasCheckedAuth) ? (
             <div className="">
-              <Skeleton className="h-10 w-16 rounded-full" />
+              <Skeleton className="size-10 rounded-full" />
             </div>
           ) : user ? (
             <UserButton user={user} />

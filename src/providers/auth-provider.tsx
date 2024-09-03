@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 
 import { Session } from "next-auth"
-import { SessionProvider, signOut } from "next-auth/react"
+import { SessionProvider } from "next-auth/react"
 import { toast } from "sonner"
 
 type AuthProviderProps = {
@@ -32,12 +32,9 @@ const RefreshTokenHandler = ({
 }: RefreshTokenHandlerProps) => {
   useEffect(() => {
     if (session?.error === "RefreshAccessTokenError") {
-      toast.error("Làm mới phiên đăng nhập thât bại!", {
-        description: "Vui lòng đăng nhập lại ",
-      })
-      signOut({
-        callbackUrl: "/auth/sign-in",
-        redirect: true,
+      toast.error("Đã xảy ra lỗi", {
+        description:
+          "Làm mới phiên đăng nhập thất bại. Vui lòng đăng xuất và đăng nhập lại để tiếp tục.",
       })
     } else if (session && session.accessTokenExpires) {
       const expirationTime = new Date(session.accessTokenExpires).getTime()

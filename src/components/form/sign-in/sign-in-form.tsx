@@ -5,7 +5,7 @@ import { useState, useTransition } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 
-import { signIn } from "@/actions/auth/sign-in"
+import { signIn } from "@/actions/auth"
 import { SignInSchema, SignInType } from "@/schemas/auth.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"

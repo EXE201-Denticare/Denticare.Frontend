@@ -2,7 +2,7 @@
 
 import React, { useTransition } from "react"
 
-import { logout } from "@/actions/auth/logout"
+import { logOut } from "@/actions/auth"
 import { UserType } from "@/schemas/user.schema"
 import { History, LogOut, Settings } from "lucide-react"
 import { useRouter } from "nextjs-toploader/app"
@@ -27,17 +27,17 @@ export default function UserButton({ user }: { user: UserType }) {
 
   async function onLogout() {
     startTransition(() => {
-      logout()
+      logOut()
         .then((data) => {
           if (data?.error) {
-            toast.error("Đã xảy ra lỗi khi đăng xuất.", {
+            toast.error("Đã xảy ra lỗi", {
               description:
-                "Vui lòng thử lại. Nếu vấn đề vẫn tiếp diễn, hãy liên hệ với bộ phận hỗ trợ.",
+                "Đăng xuất không thành công. Nếu vấn đề tiếp tục, vui lòng liên hệ bộ phận hỗ trợ.",
             })
           }
         })
         .catch(() => {
-          toast.error("Đã xảy ra lỗi khi đăng xuất.", {
+          toast.error("Đã xảy ra lỗi", {
             description:
               "Vui lòng thử lại. Nếu vấn đề vẫn tiếp diễn, hãy liên hệ với bộ phận hỗ trợ.",
           })
@@ -49,8 +49,8 @@ export default function UserButton({ user }: { user: UserType }) {
       <LogoutModal isLoading={isPending} />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="size-10 cursor-pointer shadow-sm">
-            <AvatarImage src={user?.image ?? "/assets/avatar/avatar.jpg"} />
+          <Avatar className="size-10 cursor-pointer border">
+            <AvatarImage src={user?.image ?? "/assets/avatar/me.png"} />
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mt-2 w-56" align="end">
