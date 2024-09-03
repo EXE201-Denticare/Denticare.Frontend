@@ -5,6 +5,8 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/configs/route.config"
 import { SignInSchema, SignInType } from "@/schemas/auth.schema"
 import { AuthError } from "next-auth"
 
+import { apiServer } from "@/lib/api"
+
 type Props = {
   values: SignInType
   callbackUrl?: string | null
@@ -51,10 +53,10 @@ export async function logOut() {
 
   const { accessToken, refreshToken } = session
   try {
-    // await apiServer().post("/api/denticare/sign-out", {
-    //   accessToken,
-    //   refreshToken,
-    // })
+    await apiServer().post("/api/denticare/sign-out", {
+      accessToken,
+      refreshToken,
+    })
   } catch (error) {
     return { error: "An unexpected error occurred while signing out." }
   }

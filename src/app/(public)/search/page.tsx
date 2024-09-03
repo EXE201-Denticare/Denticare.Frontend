@@ -3,7 +3,12 @@
 import { useSearchParams } from "next/navigation"
 
 import SearchResultCard from "@/containers/search-page/search-result-card"
+import { SearchIcon } from "lucide-react"
 import { useRouter } from "nextjs-toploader/app"
+
+import { cn } from "@/lib/utils"
+
+import { Input } from "@/components/ui/input"
 
 import MaxWidthWrapper from "@/components/layouts/max-width-wrapper"
 
@@ -15,6 +20,10 @@ export default function Page() {
   return (
     <MaxWidthWrapper>
       <div className="my-14 space-y-4">
+        <div className="flex">
+          <Input />
+        </div>
+
         <div>
           <p className="text-xs">300+ Nha khoa tại Denticare</p>
           <h1 className="mb-6 mt-2 text-3xl font-semibold">
