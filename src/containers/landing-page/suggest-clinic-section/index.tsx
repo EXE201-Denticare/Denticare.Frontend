@@ -73,7 +73,7 @@ export default function SuggestClinicSection() {
           {CLINIC_DATA.map((clinic, index) => (
             <CarouselItem
               key={index}
-              className="pl-5 md:basis-1/2 lg:basis-1/4"
+              className="pl-5 md:basis-1/2 lg:basis-1/3"
             >
               <CustomerClinicCard key={index} clinic={clinic} />
             </CarouselItem>
