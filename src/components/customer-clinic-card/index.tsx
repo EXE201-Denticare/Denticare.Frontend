@@ -5,20 +5,22 @@ import { CalendarIcon, ClockIcon } from "@radix-ui/react-icons"
 import { MessageCircle, Sparkles, User } from "lucide-react"
 import { toast } from "sonner"
 
+import { Card } from "@/components/ui/card"
+
 type Props = {
   clinic: any
 }
 
 export default function CustomerClinicCard({ clinic }: Props) {
   return (
-    <div
-      className="cursor-pointer space-y-6 rounded-xl border bg-white px-3 py-4 shadow-md"
+    <Card
+      className="cursor-pointer space-y-6 rounded-xl border bg-white px-3 py-4"
       onClick={() => toast.info("Coming soon...")}
     >
       <div className="relative h-[200px] w-full">
         <Image
           className="rounded-xl object-cover"
-          src={"/assets/images/clinics/clinic-1.jpg"}
+          src={"/assets/backgrounds/bg-1.png"}
           alt="Clinc"
           fill
         />
@@ -31,7 +33,7 @@ export default function CustomerClinicCard({ clinic }: Props) {
           </h2>
           <div className="flex flex-nowrap items-center">
             <StarFilledIcon className="size-4 text-yellow-500" />
-            <span className="ml-1 text-sm font-medium">
+            <span className="ml-1 text-sm font-medium text-gray-600">
               {clinic.rating} (420)
             </span>
           </div>
@@ -51,7 +53,7 @@ export default function CustomerClinicCard({ clinic }: Props) {
           </div>
         ))}
       </div>
-    </div>
+    </Card>
   )
 }
 

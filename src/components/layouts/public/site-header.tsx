@@ -39,13 +39,12 @@ function SiteHeader() {
   return (
     <header className="sticky inset-x-0 top-0 z-[50] flex h-20 w-full border-b bg-white py-5">
       <MaxWidthWrapper className="grid h-full w-full grid-cols-2 md:grid-cols-3">
-        <div className="flex items-center">
+        <div className="relative size-10">
           <Link href="/">
             <Image
-              src="/next.svg"
+              src="/assets/logos/logo.png"
               alt="logo"
-              width={100}
-              height={300}
+              fill
               className="object-contain"
             />
           </Link>

@@ -16,8 +16,8 @@ export default function ServiceCard({ service }: Props) {
         <Image
           fill
           alt="img"
-          src="/assets/services/service-ui.png"
-          className="rounded-md object-cover object-left-top"
+          src="/assets/backgrounds/bg-1.png"
+          className="rounded-md object-cover object-center"
         />
       </div>
 

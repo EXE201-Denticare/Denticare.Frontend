@@ -18,7 +18,7 @@ export default function SearchResultCard() {
     >
       <div className="relative h-40 w-full shrink-0 md:h-52 md:w-80">
         <Image
-          src={"/assets/images/clinics/clinic-1.jpg"}
+          src={"/assets/backgrounds/bg-1.png"}
           className="rounded-lg object-cover"
           alt="Clinic"
           fill
