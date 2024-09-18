@@ -37,30 +37,32 @@ function SiteHeader() {
   }, [status])
 
   return (
-    <header className="sticky inset-x-0 top-0 z-[50] flex h-20 w-full border-b bg-white py-5">
+    <header className="sticky inset-x-0 top-0 z-[50] flex h-24 w-full border-b bg-white py-5">
       <MaxWidthWrapper className="grid h-full w-full grid-cols-2 md:grid-cols-3">
-        <div className="relative size-10">
-          <Link href="/">
+        <Link href="/" className="flex items-center gap-x-1">
+          <div className="relative size-10">
             <Image
               src="/assets/logos/logo.png"
               alt="logo"
-              fill
               className="object-contain"
+              fill
             />
-          </Link>
-        </div>
+          </div>
+          {/* <p className="text-xl font-bold text-primary">DentiCare</p> */}
+        </Link>
 
         <div className="hidden items-center space-x-1 md:inline-flex">
           {navList.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={cn(
-                "whitespace-nowrap rounded-full px-4 py-1.5 font-[500] text-black/60",
-                item.isActive
-                  ? "text-black"
-                  : "hover:bg-zinc-100 hover:text-black"
-              )}
+              className={buttonVariants({
+                variant: "blueHover",
+                className: cn(
+                  "!rounded-full !text-base",
+                  item.isActive && "!font-semibold text-primary hover:bg-none"
+                ),
+              })}
             >
               {item.lable}
             </Link>
