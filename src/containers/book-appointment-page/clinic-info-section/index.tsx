@@ -10,7 +10,7 @@ export default function ClinicInfoSection() {
     <section className="flex gap-8">
       <div className="relative h-32 w-60">
         <Image
-          src={"/assets/images/clinics/clinic-1.jpg"}
+          src={"/assets/backgrounds/bg-1.png"}
           alt="Clinic"
           className="rounded-lg object-cover"
           fill

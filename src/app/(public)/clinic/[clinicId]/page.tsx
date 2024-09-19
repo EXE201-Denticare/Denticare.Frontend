@@ -65,7 +65,23 @@ export default function Page({ params }: { params: { clinicId: string } }) {
 
             {/* Booking section */}
             <Card className="w-full p-4 shadow-md">
-              <h1>Thời gian làm việc</h1>
+              <h1 className="text-lg font-semibold">Thời gian làm việc</h1>
+
+              <div className="my-4 space-y-4 rounded-lg">
+                <div className="flex items-center justify-between border-b pb-2">
+                  <p className="font-medium text-gray-700">Thứ Hai - Thứ Sáu</p>
+                  <p className="text-gray-500">8:00 AM - 6:00 PM</p>
+                </div>
+                <div className="flex items-center justify-between border-b pb-2">
+                  <p className="font-medium text-gray-700">Thứ Bảy</p>
+                  <p className="text-gray-500">8:00 AM - 4:00 PM</p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <p className="font-medium text-gray-700">Chủ Nhật</p>
+                  <p className="text-gray-500">Nghỉ</p>
+                </div>
+              </div>
+
               <Link
                 href={{
                   pathname: "/book-appointment",
