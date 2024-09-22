@@ -1,12 +1,8 @@
 import React from "react"
 
-import Image from "next/image"
-
 import { ChevronRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-
-import MaxWidthWrapper from "@/components/layouts/max-width-wrapper"
 
 export default function BannerSection() {
   return (

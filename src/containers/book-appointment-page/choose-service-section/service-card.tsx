@@ -1,15 +1,16 @@
 import Image from "next/image"
 
-import { CircleCheck, DollarSign, Plus, Sparkles } from "lucide-react"
+import { DollarSign, Plus, Sparkles } from "lucide-react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   service: any
 }
 
-export default function ServiceCard({ service }: Props) {
+export default function ServiceCard() {
   return (
     <div className="block rounded-lg">
       <div className="relative h-44 w-full">

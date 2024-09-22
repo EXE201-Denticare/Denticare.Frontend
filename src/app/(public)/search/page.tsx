@@ -3,13 +3,9 @@
 import { useSearchParams } from "next/navigation"
 
 import SearchResultCard from "@/containers/search-page/search-result-card"
-import { Filter, SearchIcon, Sparkles, Star } from "lucide-react"
+import { Filter, Sparkles, Star } from "lucide-react"
 import { useRouter } from "nextjs-toploader/app"
 import { useQueryState } from "nuqs"
-
-import { cn } from "@/lib/utils"
-
-import useDebounce from "@/hooks/useDebounce"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -64,11 +60,7 @@ export default function Page() {
                 <SelectContent>
                   {areas !== undefined &&
                     areas.map((area) => (
-                      <SelectItem
-                        key={area.id}
-                        onSelect={() => setArea(area.id)}
-                        value={area?.id?.toString()}
-                      >
+                      <SelectItem key={area.id} value={area?.id?.toString()}>
                         {area.areaName}
                       </SelectItem>
                     ))}

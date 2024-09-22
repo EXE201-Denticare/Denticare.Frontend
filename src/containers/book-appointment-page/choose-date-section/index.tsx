@@ -6,7 +6,7 @@ import Image from "next/image"
 
 import BookingInfoSection from "@/containers/book-appointment-page/booking-info-section"
 import { addDays, format } from "date-fns"
-import { Calendar, User } from "lucide-react"
+import { Calendar } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 

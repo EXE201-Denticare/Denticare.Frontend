@@ -1,6 +1,6 @@
 "use client"
 
-import { CreditCard, MoreVertical, X } from "lucide-react"
+import { CreditCard, MoreVertical } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -108,7 +108,7 @@ export default function BookingInfoSection() {
           <dl className="grid gap-3">
             <div className="flex items-center justify-between">
               <dt className="flex items-center gap-1 text-muted-foreground">
-                <CreditCard className="h-4 w-4" />
+                <CreditCard className="size-4" />
                 Visa
               </dt>
               <dd>**** **** **** 4532</dd>

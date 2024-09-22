@@ -1,4 +1,3 @@
-import BannerSection from "@/containers/landing-page/banner-section"
 import HeroSection from "@/containers/landing-page/hero-section"
 import SuggestClinicSection from "@/containers/landing-page/suggest-clinic-section"
 
