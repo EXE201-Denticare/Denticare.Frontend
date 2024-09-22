@@ -2,14 +2,13 @@
 
 import React, { useTransition } from "react"
 
-import { useRouter } from "next/navigation"
-
-import { logout } from "@/actions/auth/logout"
+import { logOut } from "@/actions/auth"
 import { UserType } from "@/schemas/user.schema"
 import { History, LogOut, Settings } from "lucide-react"
+import { useRouter } from "nextjs-toploader/app"
 import { toast } from "sonner"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,14 +27,20 @@ export default function UserButton({ user }: { user: UserType }) {
 
   async function onLogout() {
     startTransition(() => {
-      logout()
+      logOut()
         .then((data) => {
           if (data?.error) {
-            toast.error(data.error)
+            toast.error("Đã xảy ra lỗi", {
+              description:
+                "Đăng xuất không thành công. Nếu vấn đề tiếp tục, vui lòng liên hệ bộ phận hỗ trợ.",
+            })
           }
         })
         .catch(() => {
-          toast.error("An unexpected error occurred while signing out.")
+          toast.error("Đã xảy ra lỗi", {
+            description:
+              "Vui lòng thử lại. Nếu vấn đề vẫn tiếp diễn, hãy liên hệ với bộ phận hỗ trợ.",
+          })
         })
     })
   }
@@ -44,9 +49,8 @@ export default function UserButton({ user }: { user: UserType }) {
       <LogoutModal isLoading={isPending} />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="size-9 cursor-pointer">
-            <AvatarImage src={user?.image ?? "/assets/avatar/avatar.jpg"} />
-            <AvatarFallback>Ava</AvatarFallback>
+          <Avatar className="size-10 cursor-pointer border">
+            <AvatarImage src={user?.image ?? "/assets/avatar/me.png"} />
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mt-2 w-56" align="end">

@@ -1,11 +1,12 @@
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google"
 
 import { auth } from "@/auth"
-import { constructMetadata } from "@/configs/site"
+import { constructMetadata } from "@/configs/site.config"
 import AuthProvider from "@/providers/auth-provider"
 import { ReactQueryClientProvider } from "@/providers/react-query-client-provider"
 import { ThemeProvider } from "@/providers/theme-provider"
 import TailwindIndicator from "@/tools/tailwind-indicator"
+import NextTopLoader from "nextjs-toploader"
 
 import { cn } from "@/lib/utils"
 
@@ -39,6 +40,7 @@ export default async function RootLayout({
           <ReactQueryClientProvider>
             <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
               <Toaster position="top-right" />
+              <NextTopLoader height={4} color="#3b82f6" showSpinner={false} />
               <main className="flex min-h-[calc(100vh-3.5rem-1px)] flex-col">
                 <div className="flex h-full flex-1 flex-col">{children}</div>
               </main>

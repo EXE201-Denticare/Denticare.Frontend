@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation"
 
-import { DEFAULT_LOGIN_REDIRECT } from "@/configs/routes"
+import { DEFAULT_LOGIN_REDIRECT } from "@/configs/route.config"
 import { signIn } from "next-auth/react"
 import { FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"

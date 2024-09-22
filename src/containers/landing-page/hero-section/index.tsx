@@ -2,9 +2,10 @@
 
 import { useState } from "react"
 
-import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 import { ChevronRight } from "lucide-react"
+import { useRouter } from "nextjs-toploader/app"
 
 import { useCurrentSession } from "@/hooks/useCurrentSession"
 
@@ -200,11 +201,12 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="mt-10 lg:col-span-4 lg:mt-0">
-          <img
-            className="w-full rounded-xl"
-            src="https://images.unsplash.com/photo-1665686376173-ada7a0031a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&h=700&q=80"
+        <div className="relative mt-10 h-96 w-full lg:col-span-4 lg:mt-0">
+          <Image
+            src="/assets/backgrounds/bg-1.png"
             alt="Hero Image"
+            fill
+            className="rounded-xl object-cover"
           />
         </div>
       </div>
